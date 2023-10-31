@@ -1,21 +1,28 @@
 <?php 
+include './inc/db.php';
+
 $firstName       =            $POST['firstName'];
 $lastName        =            $POST['lastName'];
 $email           =            $POST['email'];
 
 if(isset($_POST['submit'])){
+    $sql = "INSERT INTO users(firstName,lastName,email) 
+    VALUES('$firstName' , '$lastName' , '$email')";
 
-echo $firstName . ' ' . $lastName . ' ' . $email ;
+    if(mysqli_query($conn, $sql)){
+        echo 'success';
+    }else{
+        echo 'Error' , mysqli_error($conn);
+    }
 }
-
-
-
+  
 
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
