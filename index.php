@@ -1,45 +1,67 @@
 <?php 
 include './inc/db.php';
-
-$firstName       =            $POST['firstName'];
-$lastName        =            $POST['lastName'];
-$email           =            $POST['email'];
-
-if(isset($_POST['submit'])){
-    $sql = "INSERT INTO users(firstName,lastName,email) 
-    VALUES('$firstName' , '$lastName' , '$email')";
-
-    if(mysqli_query($conn, $sql)){
-        echo 'success';
-    }else{
-        echo 'Error' , mysqli_error($conn);
-    }
-}
-  
-
-
+include './inc/form.php';
+//include './inc/db_close.php';
+//include './inc/select.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
-</head>
-<body>
+<?php include_once './parts/header.php';?>
 
-<form action="index.php" method="POST">
-    <input type="text" name="FirstName" id="FirstName" placeholder="FirstName">
-    <input type="text" name="LastName" id="LastName" placeholder="LastName">
-    <input type="text" name="email" id="email" placeholder="email">
-    <input type="submit" name="submit" value="send">
+
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 fw-normal">اربح معنا</h1>
+      <p class="lead fw-normal">باقي على فتح التسجيل</p>
+      <p class="lead fw-normal">للسحب على ربح نسخة مجانية من برنامج</p>
+      <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+    </div>
+   
+  </div>
+  <ul class="list-group list-group-flush">
+  <li class="list-group-item">تابع البث المباشر على صفحتي فيسبوك بالتاريخ المذكور اعلاه </li>
+  <li class="list-group-item">ساقوم ببث مباشر لمدة ساعة عبارة عن اسئلة و اجوبة حرة للجميع</li>
+  <li class="list-group-item">خلال فترة الساعة سيتم فتح صفحة التسجيل هنا حيث ستقوم بتسجيل اسمك وايميلك</li>
+  <li class="list-group-item">بنهاية البث سيتم اختيار اسم واحد من قاعدة البيانات بشكل عشوائي</li>
+  <li class="list-group-item">الرابح سيحصل على نسخة مجانية من برنامج كامنازيا</li>
+</ul>
+
+
+<form class="mt-5" action="index.php" method="POST">
+    <h3>الرجاء أدخل معلوماتك</h3>
+
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">الاسم الاول</label>
+    <input type="text" name="firstName " class="form-control" id="exampleInputEmail1" value="<?php echo $firstName ?>" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text error"><?php echo $errors['firstNameError'] ?></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">الاسم الاخير</label>
+    <input type="text" name="lastName" class="form-control" id="exampleInputEmail1" value="<?php echo $lastName ?>" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text error"><?php echo $errors['lastNameError'] ?></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">البريد الالكتروني</label>
+    <input type="text" name="email" class="form-control" id="exampleInputEmail1" value="<?php echo $email ?>" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text error"><?php echo $errors['emailError'] ?></div>
+  </div>
+
+  <button type="submit" name="submit" class="btn btn-primary">ارسال المعلومات</button>
 </form>
 
 
 
-    <script src="./js/script.js"></script>
-</body>
-</html>
+
+<?php foreach($users as $user) : ?>
+     <h1><?php  echo htmlspecialchars($user['firstName']) . ' ' . htmlspecialchars($user['lastName']) . '<br>' . htmlspecialchars($user['email']); ?></h1>
+
+</div>
+
+<?php  endforeach; ?>
+
+
+<?php include_once './parts/footer.php';?>
