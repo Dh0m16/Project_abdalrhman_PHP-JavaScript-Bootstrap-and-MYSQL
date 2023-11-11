@@ -1,4 +1,4 @@
-var countDownDate = new Date("Nov 5, 2023 23:59:59").getTime();
+var countDownDate = new Date("Nov 25, 2023 23:59:59").getTime();
 
 var x = setInterval(function () {
   var counter = document.querySelector("#countdown");
