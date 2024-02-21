@@ -20,6 +20,7 @@ var x = setInterval(function () {
 
   if (distance < 0) {
     clearInterval(x);
+    clearInterval(x);
     counter.innerHTML = "لقد وصلت متأخرًا!";
   }
 }, 1000);
